@@ -1,14 +1,20 @@
-# Not secure password manager (exercice just to practice Python)
-pwd = input("What is the master password? ")
+# Exercice just to practice, all pwds must be stored in secure databases!!
+
+master_pwd = input("What is the master password? ")
 
 def view():
-    pass
+    with open('passwords.txt', 'r') as f:
+        for line in f.readlines():
+            data = line.rstrip()
+            user, passw = data.split("|")
+            print("User:", user, ", Password:", passw)
 
 def add():
     name = input('Account Name: ')
     pwd = input("Password: ")
 
-    # with open('passwords.txt', 'a') as f:
+    with open('passwords.txt', 'a') as f:
+        f.write(name + "|" + pwd + "\n")
 
 while True:
     mode = input("Would you like to add a new password or view existing ones (view, add), press q to quit? ").lower()
